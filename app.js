@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const passport = require('passport')
 const config = require('./config/database')
+const session = require('express-session');
 
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
@@ -39,6 +40,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 //Body Parser Middleware
 app.use(bodyParser.json())
+
+//Passport Middleware
+app.use(session({secret : config.secretKey}));
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
 
 app.use('/users', users)
 
