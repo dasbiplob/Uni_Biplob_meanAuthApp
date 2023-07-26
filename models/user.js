@@ -3,37 +3,36 @@ const bcrypt = require('bcryptjs')
 const config = require('../config/database')
 
 //User Schema
-
-const userSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
     name: {
         type: String
     },
     email: {
         type: String,
-        required: true
+        required: true,
     },
     username: {
         type: String,
-        required: true
+        required: true,
     },
     password: {
         type: String,
-        required: true
+        required: true,
     }
 
 });
 
-const User = module.exports = mongoose.model('User', userSchema);
+const User = module.exports = mongoose.model('User', UserSchema);
 
-//Method for get the user by id
-module.exports.getUserById = function (id, callback) {
-    User.getUserById(id, callback);
-}
+// Method for get the user by id
+module.exports.getUserById = function (id) {
+   return  User.findById(id).exec();
+};
 
 //Method for get the user by name
-
-module.exports.getUserByName = function (username, callback) {
-    User.findOne()
+module.exports.getUserByName = function (username) {
+    const query = {username: username}
+    return User.findOne(query).exec();
 }
 
 
@@ -56,9 +55,13 @@ module.exports.addUser = function (newUser, callback) {
     });
 }
 
-module.exports.comparePassword = function(candidatePassword, hash, callback){
-    bcrypt.compare(candidatePassword, hash, (err, isMatch) =>{
-        if(err) throw err;
-        callback(null, isMatch);
-    });
-}
+// module.exports.comparePassword = function(candidatePassword, hash, callback){
+//     bcrypt.compare(candidatePassword, hash, (err, isMatch) =>{
+//         if(err) throw err;
+//         callback(null, isMatch);
+//     });
+// }
+
+module.exports.comparePassword = function (candidatePassword, hash) {
+    return bcrypt.compare(candidatePassword, hash);
+  };

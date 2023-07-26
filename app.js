@@ -13,8 +13,8 @@ mongoose.Promise = global.Promise;
 //Connect to DataBase
 mongoose.connect(config.database,{
     useNewUrlParser: true,useUnifiedTopology: true
-}).then(() => console.log('MongoDB Connected...'+ config.database))
-.catch(err => console.log(err))
+}).then(() => console.log(`Connected to database ${config.database}`))
+.catch(err => console.log(`Database error: ${err}`))
 
 // On Connection (OLD CODE -- Not Working)
 // mongoose.connection.on('Connected',()=>{
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.json())
 
 //Passport Middleware
-app.use(session({secret : config.secretKey}));
+app.use(session({secret : config.secret}));
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);

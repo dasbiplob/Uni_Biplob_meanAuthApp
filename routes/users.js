@@ -28,37 +28,72 @@ let newUser = new User({
 
 
 // Authentication
-router.post('/authentication',(req,res, next)=>{
+// router.post('/authentication',async (req,res, next)=>{
+//     const username = req.body.username;
+//     const password = req.body.password;
+
+//     User.getUserByName(username, (err, user) =>{
+        
+//         if(err) throw err;
+//         if(!user){
+//             return res.json({success: false, msg: 'User Not Found'})
+//         }
+//         User.comparePassword(password, user.password, (err, isMatch)=>{
+//             if(err)throw err;
+//             if(isMatch){
+//                 const token = jwt.sign(user, config.secret, {
+//                     expiresIn: 604800  // 1 Week
+//                 });
+//                 res.json({
+//                     success: true,
+//                     token: 'JWT '+token,
+//                     user:{
+//                         id: user._id,
+//                         name: user.name,
+//                         username: user.username,
+//                         email: user.email
+//                     }
+//                 });
+//             }else {
+//                 return res.json({success: false, msg: 'Wrong Password'})
+//             }
+//         });
+//     });
+//     });
+
+router.post('/authentication', async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
-
-    User.getUserById(username, (err, user) =>{
-        if(err) throw err;
-        if(!user){
-            return res.json({success: false, msg: 'User Not Found'})
-        }
-        User.comparePassword(password, user.password, (err, isMatch)=>{
-            if(err)throw err;
-            if(isMatch){
-                const token = jwt.sign(user, config.secret, {
-                    expiresIn: 604800  // 1 Week
-                });
-                res.json({
-                    success: true,
-                    token: 'JWT '+token,
-                    user:{
-                        id: user._id,
-                        name: user.name,
-                        username: user.username,
-                        email: user.email
-                    }
-                });
-            }else {
-                return res.json({success: false, msg: 'Wrong Password'})
-            }
+  
+    try {
+      const user = await User.getUserByName(username);
+      if (!user) {
+        return res.json({ success: false, msg: 'User Not Found' });
+      }
+  
+      const isMatch = await User.comparePassword(password, user.password);
+      if (isMatch) {
+        const token = jwt.sign(user.toJSON(), config.secret, {
+          expiresIn: 604800, // 1 Week
         });
-    });
-    });
+  
+        res.json({
+          success: true,
+          token: 'JWT ' + token,
+          user: {
+            id: user._id,
+            name: user.name,
+            username: user.username,
+            email: user.email,
+          },
+        });
+      } else {
+        return res.json({ success: false, msg: 'Wrong Password' });
+      }
+    } catch (err) {
+      return res.json({ success: false, msg: 'Authentication Failed' });
+    }
+  });
 
 // Profile
 router.get('/profile',(req,res, next)=>{
