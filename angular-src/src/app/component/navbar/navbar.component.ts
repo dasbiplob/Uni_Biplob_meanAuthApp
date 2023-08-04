@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +10,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NavbarComponent {
   constructor(
-    //private authService: AuthService,
+    private authService: AuthService,
     private router: Router,
     private toastr: ToastrService) { }
+
+    onLogoutClick(){
+      this.authService.logOut();
+      this.toastr.show('You are Logged Out!');
+      this.router.navigate(['/login']);
+    }
 
 }
