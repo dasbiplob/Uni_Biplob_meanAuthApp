@@ -24,6 +24,7 @@ export class LoginComponent {
       "username":this.username,
       "password":this.password
     }
+    
     this.authService.authenticateUser(user)
     .subscribe(data => {
       this.dataAuth = data;
@@ -33,7 +34,7 @@ export class LoginComponent {
           this.router.navigate(['dashboard']);
         }else{
           this.toastr.error(this.dataAuth.msg);
-          this.router.navigate(['/login']);
+          this.router.navigate(['login']);
         }
     });
   }

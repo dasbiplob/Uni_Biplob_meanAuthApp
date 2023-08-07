@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject,map } from 'rxjs';
 import { HttpHeaders, HttpClient,HttpClientModule} from '@angular/common/http';
-//import { isTokenExpired } from '@auth0/angular-jwt';
+//import { TokenNotExpired } from '@auth0/angular-jwt';
 
 
 
@@ -32,11 +32,11 @@ export class AuthService {
   }
 
   getProfile(){
-    let headers = new Headers();
+    let headers = new HttpHeaders();
     this.loadToken();
-    headers.append('Authorization',this.authToken);
+   console.log(headers.append('Authorization',this.authToken));
     headers.append('Content-Type','application/json');
-    return this.http.get(this._usersProfile);
+    return this.http.get(this._usersProfile,{headers: headers});
   }
 
   storeUserData(token: any, user: any){
@@ -53,8 +53,7 @@ loadToken(){
 }
 
 loggedIn(){
-  //return isTokenExpired();
-  this.user = null;
+  return !!localStorage.getItem('id_token');
 }
 
   logOut(){

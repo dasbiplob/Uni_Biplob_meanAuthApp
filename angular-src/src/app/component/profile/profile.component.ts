@@ -9,19 +9,17 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent {
 
-user: any;
+"user": any;
 
   constructor(private authService:AuthService,
     private router:Router){}
 
     ngOnInit(){
       this.authService.getProfile()
-      .subscribe(profile=>{
-        this.user = profile.valueOf;
-      },
-      err =>{
-         console.log(err);
-         return false;
-      });
+      .subscribe({
+        next: (profile:any) => this.user = profile.user,
+        error: (err) => console.error(err),
+        complete: () => console.info('complete') 
+    });
     }
 }

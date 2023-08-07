@@ -53,10 +53,13 @@ app.use('/users', users)
 //Index routes
 app.get('/',(req,res) =>{
     res.send("Welcome To MEAN Authentication Application")
-})
+});
 
+app.get('*',(req,res) =>{
+res.sendFile(path.join(__dirname,'public/index.html'))
+});
 
 //Start Server
 app.listen(port,()=> {
     console.log(`Example app listening on port ${port}`)
-}) 
+});
