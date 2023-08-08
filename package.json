@@ -4,7 +4,6 @@
   "description": "MEAN stack authentication APP",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app"
   },
   "author": "Biplob Das",
@@ -20,8 +19,5 @@
     "mongoose": "^7.4.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
   }
 }
