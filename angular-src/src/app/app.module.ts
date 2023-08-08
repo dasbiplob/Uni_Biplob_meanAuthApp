@@ -19,6 +19,7 @@ import { AuthService } from './services/auth.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthInterceptor} from './services/auth.interceptor';
 
 const appRoutes: Routes = [
   {path: '',component: HomeComponent},
@@ -47,7 +48,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [ValidateService,AuthService, AuthGuard],
+  providers: [ValidateService,AuthService, AuthGuard,AuthInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
