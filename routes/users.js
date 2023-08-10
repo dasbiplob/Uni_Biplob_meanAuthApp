@@ -104,6 +104,6 @@ router.get('/profile',passport.authenticate('jwt', {session: false}),(req,res, n
         email: req.user.email,
       }
     });
-    });
+});
 
 module.exports = router;
