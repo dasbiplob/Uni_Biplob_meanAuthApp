@@ -18,6 +18,7 @@ export class NavbarComponent {
       this.authService.logOut();
       this.toastr.show('You are Logged Out!');
       this.router.navigate(['/login']);
+      return false;
     }
 
 }

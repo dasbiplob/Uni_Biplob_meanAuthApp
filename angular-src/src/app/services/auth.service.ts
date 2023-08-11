@@ -16,23 +16,24 @@ export class AuthService {
   private _authenticateUrl = "users/authentication"
   private _usersProfile = "users/profile" */
 
+  // For Dev
   private _registerUrl = "http://localhost:3000/users/register"
   private _authenticateUrl = "http://localhost:3000/users/authentication"
   private _usersProfile = "http://localhost:3000/users/profile"
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {}
 
   registerUser(user: any){
-    let headers = new Headers();
+    let headers = new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post(this._registerUrl, user);
+    return this.http.post(this._registerUrl, user, {headers: headers});
 
   }
 
   authenticateUser(user: any){
-    let headers = new Headers();
+    let headers = new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post(this._authenticateUrl,user);
+    return this.http.post(this._authenticateUrl,user, {headers: headers});
   }
 
   loadToken(){
@@ -58,13 +59,10 @@ export class AuthService {
       headers = headers.append('Authorization', this.authToken);
       debugger
       headers = headers.append('Content-Type', 'application/json');
-      return this.http.get(this._usersProfile, {headers: headers}).pipe(
-        catchError((error: any) =>{
-          console.log(error);
-          throw 'Something went wrong';
-        })
-      )
-        
+      console.log(this._usersProfile);
+      console.log({headers: headers});
+      console.log(this.http.get(this._usersProfile, {headers: headers}));
+      return this.http.get(this._usersProfile, {headers: headers});
     }
 
   storeUserData(token: any, user: any){

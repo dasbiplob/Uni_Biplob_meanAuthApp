@@ -33,14 +33,14 @@ dataRegister:any={}
        if(!this.validateService.validateRegister(user)){
         //console.log('Please fill in all the Fields');
         this.toastr.info('Please fill in all fields');
-        //return false;
+        return false;
        }
    
        // Validate Email
        if(!this.validateService.validateEmail(user.email)){
         //console.log('Please use a valid email');
         this.toastr.error('Please use a valid email');
-        //return false;
+        return false;
        }
 
 
