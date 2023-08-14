@@ -104,6 +104,7 @@ router.get('/profile',passport.authenticate('jwt', {session: false}),(req,res, n
         email: req.user.email,
       }
     });
+    console.log(req.user);
 }); 
 /* router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   res.json({user: req.user});

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Observable, of, Subject} from 'rxjs';
 import { Router } from '@angular/router';
@@ -11,7 +11,9 @@ import { UserProfile } from './user-profile';
 })
 export class ProfileComponent {
 
-  user: any = {};
+  @Input() user: UserProfile = {
+  };
+  //user: any = {};
   //"user":Object = {};
   //"user": UserProfile;
 
@@ -28,9 +30,9 @@ export class ProfileComponent {
   });
  } */
 
- ngOnInit() {
-  this.authService.getProfile().subscribe(profile => {
-    this.user = profile.user;
+ async ngOnInit() {
+  (await this.authService.getProfile()).subscribe((profile: UserProfile) => {
+    this.user = profile;
   },
    err => {
      console.log(err);

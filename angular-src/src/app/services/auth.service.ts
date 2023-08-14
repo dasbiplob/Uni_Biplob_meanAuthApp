@@ -12,14 +12,14 @@ export class AuthService {
   user: any;
 
   //For Production
-  private _registerUrl = "users/register"
+/*   private _registerUrl = "users/register"
   private _authenticateUrl = "users/authentication"
-  private _usersProfile = "users/profile"
+  private _usersProfile = "users/profile" */
 
   // For Dev
-  /* private _registerUrl = "http://localhost:3000/users/register"
+  private _registerUrl = "http://localhost:3000/users/register"
   private _authenticateUrl = "http://localhost:3000/users/authentication"
-  private _usersProfile = "http://localhost:3000/users/profile" */
+  private _usersProfile = "http://localhost:3000/users/profile"
 
   constructor(private http:HttpClient) {}
 
@@ -53,7 +53,7 @@ export class AuthService {
     return this.http.get(this._usersProfile,{headers: headers});
   } */
 
-    getProfile():Observable<any> {
+    async getProfile(){
       let headers = new HttpHeaders();
       this.loadToken();
       headers = headers.append('Authorization', this.authToken);
@@ -62,7 +62,7 @@ export class AuthService {
       console.log(this._usersProfile);
       console.log({headers: headers});
       console.log(this.http.get(this._usersProfile, {headers: headers}));
-      return this.http.get(this._usersProfile, {headers: headers});
+      return await this.http.get(this._usersProfile, {headers: headers});
     }
 
   storeUserData(token: any, user: any){
