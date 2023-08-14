@@ -28,8 +28,10 @@ mongoose.connect(config.database,{
 
 
 const app = express();
-//const port = process.env.PORT || 8080;
-const port = process.env.PORT || 3000;
+//For Prod
+const port = process.env.PORT || 8080;
+//For Dev
+//const port = process.env.PORT || 3000;
 
 const users = require('./routes/users.js'); 
 

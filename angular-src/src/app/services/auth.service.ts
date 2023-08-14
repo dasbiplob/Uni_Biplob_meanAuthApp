@@ -12,14 +12,14 @@ export class AuthService {
   user: any;
 
   //For Production
-  /* private _registerUrl = "users/register"
+  private _registerUrl = "users/register"
   private _authenticateUrl = "users/authentication"
-  private _usersProfile = "users/profile" */
+  private _usersProfile = "users/profile"
 
   // For Dev
-  private _registerUrl = "http://localhost:3000/users/register"
+  /* private _registerUrl = "http://localhost:3000/users/register"
   private _authenticateUrl = "http://localhost:3000/users/authentication"
-  private _usersProfile = "http://localhost:3000/users/profile"
+  private _usersProfile = "http://localhost:3000/users/profile" */
 
   constructor(private http:HttpClient) {}
 
