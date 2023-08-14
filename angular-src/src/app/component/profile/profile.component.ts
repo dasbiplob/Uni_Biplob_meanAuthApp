@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Observable, of, Subject} from 'rxjs';
 import { Router } from '@angular/router';
-import { UserProfile } from './user-profile';
+import { UserProfile } from "./UserProfile";
 
 @Component({
   selector: 'app-profile',
@@ -11,9 +11,8 @@ import { UserProfile } from './user-profile';
 })
 export class ProfileComponent {
 
-  @Input() user: UserProfile = {
-  };
-  //user: any = {};
+  //@Input() user: UserProfile = {};
+  user: any = {};
   //"user":Object = {};
   //"user": UserProfile;
 

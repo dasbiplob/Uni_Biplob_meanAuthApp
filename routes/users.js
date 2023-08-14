@@ -28,39 +28,6 @@ let newUser = new User({
 
 
 // Authentication
-// router.post('/authentication',async (req,res, next)=>{
-//     const username = req.body.username;
-//     const password = req.body.password;
-
-//     User.getUserByName(username, (err, user) =>{
-        
-//         if(err) throw err;
-//         if(!user){
-//             return res.json({success: false, msg: 'User Not Found'})
-//         }
-//         User.comparePassword(password, user.password, (err, isMatch)=>{
-//             if(err)throw err;
-//             if(isMatch){
-//                 const token = jwt.sign(user, config.secret, {
-//                     expiresIn: 604800  // 1 Week
-//                 });
-//                 res.json({
-//                     success: true,
-//                     token: 'JWT '+token,
-//                     user:{
-//                         id: user._id,
-//                         name: user.name,
-//                         username: user.username,
-//                         email: user.email
-//                     }
-//                 });
-//             }else {
-//                 return res.json({success: false, msg: 'Wrong Password'})
-//             }
-//         });
-//     });
-//     });
-
 router.post('/authentication', async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -96,7 +63,7 @@ router.post('/authentication', async (req, res, next) => {
   });
 
 // Profile
-router.get('/profile',passport.authenticate('jwt', {session: false}),(req,res, next)=>{
+/* router.get('/profile',passport.authenticate('jwt', {session: false}),(req,res, next)=>{
     res.json({user: {
         _id: req.user._id,
         name: req.user.name,
@@ -105,10 +72,10 @@ router.get('/profile',passport.authenticate('jwt', {session: false}),(req,res, n
       }
     });
     console.log(req.user);
-}); 
-/* router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+});  */
+router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   res.json({user: req.user});
   console.log(req.user);
-}); */
+});
 
 module.exports = router;

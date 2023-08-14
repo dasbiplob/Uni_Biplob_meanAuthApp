@@ -16,22 +16,13 @@ mongoose.connect(config.database,{
 }).then(() => console.log(`Connected to database ${config.database}`))
 .catch(err => console.log(`Database error: ${err}`))
 
-// On Connection (OLD CODE -- Not Working)
-// mongoose.connection.on('Connected',()=>{
-//     console.log('Connected To DataBase' + config.database);
-// });
-
-// // To check the error in Mongoose
-// mongoose.connection.on('Error',(error)=>{
-//     console.log('Database Error' + error);
-// });
 
 
 const app = express();
 //For Prod
-const port = process.env.PORT || 8080;
+//const port = process.env.PORT || 8080;
 //For Dev
-//const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 const users = require('./routes/users.js'); 
 
