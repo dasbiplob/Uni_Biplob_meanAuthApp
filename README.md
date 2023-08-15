@@ -32,16 +32,12 @@ Before you begin, ensure you have met the following requirements:
 ### Installation
 
 1. Clone the repository:
-   git clone https://github.com/your-username/mean-auth-app.git
-   cd mean-auth-app
+   git clone [https://github.com/your-username/mean-auth-app.git](https://github.com/dasbiplob/Uni_Biplob_meanAuthApp)
+   cd Uni_Biplob_meanAuthApp
    
-Of course, I'd be happy to help you write a README file for your MEAN stack authorization application. A README file is a crucial part of your project, as it provides essential information to users and collaborators. Here's a template you can use as a starting point:
-
 markdown
 Copy code
 # MEAN Stack Authorization Application
-
-![Project Logo](link-to-your-logo.png) <!-- If you have a logo or image -->
 
 Welcome to the MEAN Stack Authorization Application! This application demonstrates a secure user authentication and authorization system using the MEAN (MongoDB, Express.js, Angular, Node.js) stack. It allows users to register, log in, and access authorized content.
 
@@ -117,3 +113,4 @@ For any inquiries or feedback, please contact:
 
 Your Name - biplob90.d@gmail.com
 Project Link: https://github.com/dasbiplob/Uni_Biplob_meanAuthApp
+Youtube Link : https://youtu.be/tl7O10CUQnU
